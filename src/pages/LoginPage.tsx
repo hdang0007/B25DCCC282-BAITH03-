@@ -1,0 +1,12 @@
+import { ArrowLeft, ArrowRight, LockKeyhole, ShoppingBag } from 'lucide-react'
+import { useEffect, useState, type FormEvent } from 'react'
+import { Link, useLocation, useNavigate, type Location } from 'react-router-dom'
+import { useAuth } from '../contexts/AuthContext'
+interface LoginLocationState { from?: Location }
+export function LoginPage() {
+  const [username, setUsername] = useState(''); const [password, setPassword] = useState(''); const [error, setError] = useState(''); const { login, user } = useAuth(); const navigate = useNavigate(); const location = useLocation(); const state = location.state as LoginLocationState | null
+  useEffect(() => { if (user) navigate(state?.from?.pathname ?? '/', { replace: true }) }, [navigate, state?.from?.pathname, user])
+  if (user) return null
+  const submit = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); setError(''); if (login(username, password)) navigate(state?.from ? `${state.from.pathname}${state.from.search}${state.from.hash}` : '/', { replace: true }); else setError('Tên đăng nhập hoặc mật khẩu chưa đúng. Hãy thử lại nhé.') }
+  return <section className="auth-page"><Link className="back-link" to="/"><ArrowLeft size={16} /> Trở lại cửa hàng</Link><div className="auth-card"><div className="auth-brand"><span className="brand-mark"><ShoppingBag size={19} /></span></div><div className="section-kicker"><span className="kicker-line" />CHÀO MỪNG BẠN</div><h1>Rất vui được<br />gặp bạn<span>.</span></h1><p className="auth-description">Đăng nhập để tiếp tục thanh toán và xem những món đồ bạn yêu thích.</p><form className="auth-form" onSubmit={submit}><label>Tên đăng nhập<input autoComplete="username" value={username} onChange={(event) => setUsername(event.target.value)} placeholder="Ví dụ: linhnguyen" required /></label><label>Mật khẩu<input autoComplete="current-password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Nhập mật khẩu" required /></label>{error && <p className="form-error" role="alert"><LockKeyhole size={15} />{error}</p>}<button className="button button-dark auth-submit" type="submit">Đăng nhập <ArrowRight size={17} /></button></form><div className="demo-hint"><span className="demo-hint-icon"><LockKeyhole size={15} /></span><span>Để trải nghiệm, nhập mật khẩu <strong>123456</strong> nhé.</span></div></div><p className="auth-footer-note">MỘT CỬA HÀNG NHỎ, LUÔN CHÀO ĐÓN BẠN.</p></section>
+}

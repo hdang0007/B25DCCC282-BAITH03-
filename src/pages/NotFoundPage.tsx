@@ -1,0 +1,3 @@
+import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+export function NotFoundPage() { const navigate = useNavigate(); return <section className="not-found"><span className="not-found-number">404</span><div className="section-kicker"><span className="kicker-line" />LẠC MỘT CHÚT RỒI</div><h1>Trang này không có trên kệ.</h1><p>Đường dẫn bạn tìm chưa nằm trong bộ sưu tập của ShopMini.</p><div className="not-found-actions"><button className="back-link" onClick={() => navigate(-1)}><ArrowLeft size={16} /> Quay lại</button><Link className="button button-dark" to="/">Về cửa hàng <ArrowRight size={16} /></Link></div></section> }

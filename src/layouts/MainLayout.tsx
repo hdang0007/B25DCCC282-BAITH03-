@@ -1,0 +1,4 @@
+import { Instagram, MoveUpRight } from 'lucide-react'
+import { Link, Outlet } from 'react-router-dom'
+import { Header } from '../components/Header'
+export function MainLayout() { return <><Header /><main className="page-shell"><Outlet /></main><footer className="site-footer" id="about"><div className="footer-inner"><Link className="brand footer-brand" to="/"><span className="brand-mark"><span className="brand-mark-letter">s</span></span><span>shop<span className="brand-accent">mini</span><small>CURATED EVERYDAY</small></span></Link><p>Những món đồ hay ho, cho những ngày thật vui.</p><div className="footer-social"><a href="https://instagram.com" aria-label="Instagram"><Instagram size={17} /></a><a href="#top" aria-label="Quay lại đầu trang"><MoveUpRight size={17} /></a></div></div><div className="footer-bottom"><span>© 2025 ShopMini Studio</span><span>Được chọn lựa với sự quan tâm.</span></div></footer></> }
